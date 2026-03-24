@@ -17,4 +17,4 @@ disciplines = [
     "mathematics",
     "physics"
 ]
-exclude = ["README.md", "CHANGELOG.md", "example.svg", "thumbnail.png"]
+exclude = ["CHANGELOG.md", "example.svg", "thumbnail.png"]

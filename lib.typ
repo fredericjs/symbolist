@@ -38,21 +38,21 @@
   return false
 }
 
-#let symbol_state = state("symbol-state", ())
+#let _symbol-state = state("symbol-state", ())
 
-#let def-symbol(sym_, description, unit: none) = {
-  let math_string = _math-to-string(sym_)
+#let def-symbol(symbol-definition, description, unit: none) = {
+  let math_string = _math-to-string(symbol-definition)
   context{
-  symbol_state.update(s => {
+  _symbol-state.update(s => {
     let new_s = s
-    new_s.push((math_string, sym_, description, unit))
+    new_s.push((math_string, symbol-definition, description, unit))
     return new_s
   })}
 }
 
 #let get-latin-symbols() = {
   let latin-symbols = ()
-  for (sym_string, sym_math, desc, unit) in symbol_state.final().sorted(key: item => item.at(0)) {
+  for (sym_string, sym_math, desc, unit) in _symbol-state.final().sorted(key: item => item.at(0)) {
     if not _is-greek-symbol(sym_string) {
       latin-symbols.push((sym_math, desc, unit))
     }
@@ -62,7 +62,7 @@
 
 #let get-greek-symbols() = {
   let greek-symbols = ()
-  for (sym_string, sym_math, desc, unit) in symbol_state.final().sorted(key: item => item.at(0)) {
+  for (sym_string, sym_math, desc, unit) in _symbol-state.final().sorted(key: item => item.at(0)) {
     if _is-greek-symbol(sym_string) {
       greek-symbols.push((sym_math, desc, unit))
     }
@@ -74,7 +74,7 @@
   context{
     let latin-symbols = ()
     let greek-symbols = ()
-    for (sym_string, sym_math, desc, unit) in symbol_state.final() {
+    for (sym_string, sym_math, desc, unit) in _symbol-state.final() {
       if _is-greek-symbol(sym_string) {
         greek-symbols.push((sym_string, sym_math, desc, unit))
       } else {
