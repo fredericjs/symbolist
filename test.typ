@@ -1,5 +1,10 @@
 #import "@local/symbolist:0.2.0": *
 
+// Exercise inheritance for the numbering: auto default — when the
+// document numbers its headings, symbolist's section titles should
+// pick that numbering up too.
+#set heading(numbering: "1.")
+
 // --- Basic Latin symbols ---
 #def-symbol($F$, "Force", unit: "N")
 #def-symbol($m$, "Mass", unit: "kg")
@@ -32,3 +37,6 @@
 
 = Italic symbols (upright: false)
 #print-symbols(upright: false)
+
+= Suppressed title numbering (numbering: none)
+#print-symbols(numbering: none)

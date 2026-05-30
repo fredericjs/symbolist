@@ -78,7 +78,7 @@ Defines a symbol with its description and optional unit.
 #def-symbol($n$, "Number of samples") // No unit
 ```
 
-#### `print-symbols(level: 2, print-units: true, print-header: true, upright: true, ..table-args)`
+#### `print-symbols(level: 2, print-units: true, print-header: true, upright: true, numbering: auto, ..table-args)`
 
 Generates formatted tables of all defined symbols. Symbols are automatically:
 - Separated into Latin and Greek categories
@@ -93,6 +93,7 @@ Sections with no symbols are omitted entirely.
 - `print-header` (boolean, default: `true`): Whether to include table headers (Symbol, Description, Unit)
 - `upright` (boolean, default: `true`): Whether the symbols are rendered in upright (roman) math style. Set to `false` to keep the default italic math rendering of variables (`$A_t$` stays italic). Units are always rendered upright. \
   **Why you might want `upright: false`:** ISO 80000-2 and most physics/engineering style guides reserve upright type for *units* and italic for *variables*. Mixing the two collapses useful distinctions — for example, with the default `upright: true`, the symbol for *mass* `$m$` renders as `m` and is visually indistinguishable from the unit symbol for *metre* (`m`) in the Unit column, so a row like `m | Mass | kg` reads ambiguously next to a row like `L | Length | m`. Setting `upright: false` keeps mass as italic *m* against the upright meter `m`, restoring the visual cue.
+- `numbering` (any, default: `auto`): Numbering value forwarded to the section-title `heading(...)` calls. With the default `auto` the headings inherit whatever `set heading(numbering: ...)` is in effect in the surrounding document (existing behaviour). Pass `numbering: none` to suppress the numbering even when the rest of the document is numbered — useful when the symbol list lives in front matter and you don't want it counted as a numbered section. Any other value accepted by `heading.numbering` (a pattern string like `"1."` or a function) is forwarded verbatim.
 - `..table-args`: Any additional named arguments are forwarded to the underlying `table` elements, letting you override defaults like `fill`, `align`, `inset`, `column-gutter`, etc.
 
 **Examples:**
@@ -105,6 +106,12 @@ Sections with no symbols are omitted entirely.
 
 // Keep symbols in italic math style (e.g. for physics conventions)
 #print-symbols(upright: false)
+
+// Suppress section-title numbering (e.g. when the rest of the
+// document uses `set heading(numbering: "1.")` but you want
+// the symbol list to render as an unnumbered front-matter
+// section).
+#print-symbols(numbering: none)
 
 // Hide the units column
 #print-symbols(print-units: false)

@@ -19,6 +19,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   via `math.upright(...)`. Pass `upright: false` to keep the math italics of
   variables (e.g. `$A_t$` stays italic). Units are always rendered upright.
   The default value preserves the previous behaviour.
+- `print-symbols` now accepts a `numbering:` parameter (default `auto`) that
+  is forwarded to the section-title `heading(...)` calls. The default `auto`
+  inherits whatever `set heading(numbering: ...)` is in effect in the
+  surrounding document (existing behaviour). Pass `numbering: none` to
+  suppress the section-title numbering even when the rest of the document is
+  numbered — useful for front-matter symbol lists. Any value accepted by
+  `heading.numbering` is forwarded verbatim.
 
 ## [0.1.0] - 2026-03-16
 

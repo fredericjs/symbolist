@@ -75,6 +75,7 @@
   print-units: true,
   print-header: true,
   upright: true,
+  numbering: auto,
   ..table-args,
 ) = {
   context{
@@ -97,6 +98,16 @@
 
     let format-sym(sym_math) = if upright { math.upright(sym_math) } else { sym_math }
 
+    // Pass `numbering` through to the section-title heading only when the
+    // caller has overridden the default sentinel `auto`; otherwise the
+    // heading inherits whatever `set heading(numbering: ...)` is in effect
+    // in the surrounding document.
+    let title-heading(body) = if numbering == auto {
+      heading(outlined: false, level: level, body)
+    } else {
+      heading(outlined: false, level: level, numbering: numbering, body)
+    }
+
     let symbol-cells(symbols) = {
       for (sym_string, sym_math, desc, unit) in symbols.sorted(key: item => item.at(0)) {
         if print-units {
@@ -115,7 +126,7 @@
 
       if has-latin {
         cells.push(table.cell(colspan: columns, inset: (x: 0pt))[
-          #heading(outlined: false, level: level)[Latin symbols]
+          #title-heading[Latin symbols]
         ])
         cells += header-cells
         cells += symbol-cells(latin-symbols)
@@ -123,7 +134,7 @@
 
       if has-greek {
         cells.push(table.cell(colspan: columns, inset: (x: 0pt))[
-          #heading(outlined: false, level: level)[Greek symbols]
+          #title-heading[Greek symbols]
         ])
         cells += header-cells
         cells += symbol-cells(greek-symbols)
