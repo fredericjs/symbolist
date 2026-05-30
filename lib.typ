@@ -70,7 +70,13 @@
   return greek-symbols
 }
 
-#let print-symbols(level: 2, print-units: true, print-header: true, ..table-args) = {
+#let print-symbols(
+  level: 2,
+  print-units: true,
+  print-header: true,
+  upright: true,
+  ..table-args,
+) = {
   context{
     let latin-symbols = ()
     let greek-symbols = ()
@@ -89,12 +95,14 @@
       else { ([Symbol], [Description]) }
     } else { () }
 
+    let format-sym(sym_math) = if upright { math.upright(sym_math) } else { sym_math }
+
     let symbol-cells(symbols) = {
       for (sym_string, sym_math, desc, unit) in symbols.sorted(key: item => item.at(0)) {
         if print-units {
-          (math.upright(sym_math), desc, if unit != none { math.upright(unit) } else { [] })
+          (format-sym(sym_math), desc, if unit != none { math.upright(unit) } else { [] })
         } else {
-          (math.upright(sym_math), desc)
+          (format-sym(sym_math), desc)
         }
       }
     }

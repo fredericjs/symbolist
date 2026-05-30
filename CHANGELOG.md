@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Pass `level: 1` to render them at the same size as top-level chapter
   headings, or any other depth that matches your document's hierarchy. The
   default value is unchanged, so existing documents render identically.
+- `print-symbols` now accepts an `upright:` parameter (default `true`) that
+  controls whether the symbol column is forced into upright (roman) math style
+  via `math.upright(...)`. Pass `upright: false` to keep the math italics of
+  variables (e.g. `$A_t$` stays italic). Units are always rendered upright.
+  The default value preserves the previous behaviour.
 
 ## [0.1.0] - 2026-03-16
 

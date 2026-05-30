@@ -78,7 +78,7 @@ Defines a symbol with its description and optional unit.
 #def-symbol($n$, "Number of samples") // No unit
 ```
 
-#### `print-symbols(level: 2, print-units: true, print-header: true, ..table-args)`
+#### `print-symbols(level: 2, print-units: true, print-header: true, upright: true, ..table-args)`
 
 Generates formatted tables of all defined symbols. Symbols are automatically:
 - Separated into Latin and Greek categories
@@ -91,15 +91,19 @@ Sections with no symbols are omitted entirely.
 - `level` (integer, default: `2`): The heading level used for the "Latin symbols" and "Greek symbols" section titles. Set this to slot the symbol tables into your document's heading hierarchy (e.g. `level: 1` to use the same size as your top-level chapter headings).
 - `print-units` (boolean, default: `true`): Whether to include the units column in the table
 - `print-header` (boolean, default: `true`): Whether to include table headers (Symbol, Description, Unit)
+- `upright` (boolean, default: `true`): Whether the symbols are rendered in upright (roman) math style. Set to `false` to keep the default italic math rendering of variables (`$A_t$` stays italic). Units are always rendered upright.
 - `..table-args`: Any additional named arguments are forwarded to the underlying `table` elements, letting you override defaults like `fill`, `align`, `inset`, `column-gutter`, etc.
 
 **Examples:**
 ```typ
-// Default: show units and headers, titles at level 2
+// Default: show units and headers, titles at level 2, upright symbols
 #print-symbols()
 
 // Render the section titles as level-1 headings
 #print-symbols(level: 1)
+
+// Keep symbols in italic math style (e.g. for physics conventions)
+#print-symbols(upright: false)
 
 // Hide the units column
 #print-symbols(print-units: false)
@@ -212,7 +216,7 @@ Because they read from Typst state, they **must be called inside a `context` blo
 2. Units are optional - omit them for dimensionless quantities or mathematical indices
 3. Use `print-units: false` when working with purely mathematical symbols without physical dimensions
 4. The symbol list is generated at the point where you call `#print-symbols()`, typically near the start or end of your document
-5. Symbols are automatically formatted in upright style in the list for consistency
+5. Symbols are formatted in upright style by default for consistency; pass `upright: false` to `print-symbols` to keep them in italic math style instead
 
 ## License
 

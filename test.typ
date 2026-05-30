@@ -29,3 +29,6 @@
 
 = Custom heading level
 #print-symbols(level: 1)
+
+= Italic symbols (upright: false)
+#print-symbols(upright: false)
