@@ -91,7 +91,8 @@ Sections with no symbols are omitted entirely.
 - `level` (integer, default: `2`): The heading level used for the "Latin symbols" and "Greek symbols" section titles. Set this to slot the symbol tables into your document's heading hierarchy (e.g. `level: 1` to use the same size as your top-level chapter headings).
 - `print-units` (boolean, default: `true`): Whether to include the units column in the table
 - `print-header` (boolean, default: `true`): Whether to include table headers (Symbol, Description, Unit)
-- `upright` (boolean, default: `true`): Whether the symbols are rendered in upright (roman) math style. Set to `false` to keep the default italic math rendering of variables (`$A_t$` stays italic). Units are always rendered upright.
+- `upright` (boolean, default: `true`): Whether the symbols are rendered in upright (roman) math style. Set to `false` to keep the default italic math rendering of variables (`$A_t$` stays italic). Units are always rendered upright. \
+  **Why you might want `upright: false`:** ISO 80000-2 and most physics/engineering style guides reserve upright type for *units* and italic for *variables*. Mixing the two collapses useful distinctions — for example, with the default `upright: true`, the symbol for *mass* `$m$` renders as `m` and is visually indistinguishable from the unit symbol for *metre* (`m`) in the Unit column, so a row like `m | Mass | kg` reads ambiguously next to a row like `L | Length | m`. Setting `upright: false` keeps mass as italic *m* against the upright meter `m`, restoring the visual cue.
 - `..table-args`: Any additional named arguments are forwarded to the underlying `table` elements, letting you override defaults like `fill`, `align`, `inset`, `column-gutter`, etc.
 
 **Examples:**
