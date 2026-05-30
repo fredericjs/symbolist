@@ -9,7 +9,7 @@ Symbolist is a Typst package that helps generate an organized list of mathematic
 Import the package and start defining symbols throughout your document. At the end, generate a formatted table of all symbols with their descriptions and units.
 
 ```typ
-#import "@preview/symbolist:0.1.0": *
+#import "@preview/symbolist:0.2.0": *
 
 // Define symbols as you use them
 #def-symbol($F$, "Force", unit: "N")
@@ -27,18 +27,18 @@ Import the package and start defining symbols throughout your document. At the e
 To use this package in your Typst document, simply import it from the Typst package repository:
 
 ```typ
-#import "@preview/symbolist:0.1.0": *
+#import "@preview/symbolist:0.2.0": *
 ```
 
 For local development:
 
 1. Clone this repository to your local machine
 2. Place the package files in your Typst local packages directory:
-   - **Linux/macOS**: `~/.local/share/typst/packages/local/symbolist/0.1.0/`
-   - **Windows**: `%APPDATA%\typst\packages\local\symbolist\0.1.0\`
+   - **Linux/macOS**: `~/.local/share/typst/packages/local/symbolist/0.2.0/`
+   - **Windows**: `%APPDATA%\typst\packages\local\symbolist\0.2.0\`
 3. Import using the local namespace:
    ```typ
-   #import "@local/symbolist:0.1.0": *
+   #import "@local/symbolist:0.2.0": *
    ```
 
 For more information on local packages, see the [Typst package documentation](https://github.com/typst/packages).
@@ -50,7 +50,7 @@ For more information on local packages, see the [Typst package documentation](ht
 Define symbols anywhere in your document using `def-symbol()`:
 
 ```typ
-#import "@preview/symbolist:0.1.0": *
+#import "@preview/symbolist:0.2.0": *
 
 = Introduction
 The force $F$ acting on a mass $m$ produces acceleration $a$.
@@ -78,7 +78,7 @@ Defines a symbol with its description and optional unit.
 #def-symbol($n$, "Number of samples") // No unit
 ```
 
-#### `print-symbols(print-units: true, print-header: true, ..table-args)`
+#### `print-symbols(level: 2, print-units: true, print-header: true, ..table-args)`
 
 Generates formatted tables of all defined symbols. Symbols are automatically:
 - Separated into Latin and Greek categories
@@ -88,14 +88,18 @@ Generates formatted tables of all defined symbols. Symbols are automatically:
 Sections with no symbols are omitted entirely.
 
 **Parameters:**
+- `level` (integer, default: `2`): The heading level used for the "Latin symbols" and "Greek symbols" section titles. Set this to slot the symbol tables into your document's heading hierarchy (e.g. `level: 1` to use the same size as your top-level chapter headings).
 - `print-units` (boolean, default: `true`): Whether to include the units column in the table
 - `print-header` (boolean, default: `true`): Whether to include table headers (Symbol, Description, Unit)
 - `..table-args`: Any additional named arguments are forwarded to the underlying `table` elements, letting you override defaults like `fill`, `align`, `inset`, `column-gutter`, etc.
 
 **Examples:**
 ```typ
-// Default: show units and headers
+// Default: show units and headers, titles at level 2
 #print-symbols()
+
+// Render the section titles as level-1 headings
+#print-symbols(level: 1)
 
 // Hide the units column
 #print-symbols(print-units: false)
@@ -117,7 +121,7 @@ Sections with no symbols are omitted entirely.
 ### Complete Example
 
 ```typ
-#import "@preview/symbolist:0.1.0": *
+#import "@preview/symbolist:0.2.0": *
 
 = Physics Problem
 

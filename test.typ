@@ -1,4 +1,4 @@
-#import "@local/symbolist:0.1.0": *
+#import "@local/symbolist:0.2.0": *
 
 // --- Basic Latin symbols ---
 #def-symbol($F$, "Force", unit: "N")
@@ -26,3 +26,6 @@
 
 = No units, no headers
 #print-symbols(print-units: false, print-header: false)
+
+= Custom heading level
+#print-symbols(level: 1)

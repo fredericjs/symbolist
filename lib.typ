@@ -70,7 +70,7 @@
   return greek-symbols
 }
 
-#let print-symbols(print-units: true, print-header: true, ..table-args) = {
+#let print-symbols(level: 2, print-units: true, print-header: true, ..table-args) = {
   context{
     let latin-symbols = ()
     let greek-symbols = ()
@@ -107,7 +107,7 @@
 
       if has-latin {
         cells.push(table.cell(colspan: columns, inset: (x: 0pt))[
-          #heading(outlined: false, level: 2)[Latin symbols]
+          #heading(outlined: false, level: level)[Latin symbols]
         ])
         cells += header-cells
         cells += symbol-cells(latin-symbols)
@@ -115,7 +115,7 @@
 
       if has-greek {
         cells.push(table.cell(colspan: columns, inset: (x: 0pt))[
-          #heading(outlined: false, level: 2)[Greek symbols]
+          #heading(outlined: false, level: level)[Greek symbols]
         ])
         cells += header-cells
         cells += symbol-cells(greek-symbols)
